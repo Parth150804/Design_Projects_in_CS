@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Stock Price Plot</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h1>Multiple Stock Price Plot</h1>
+    <div id="plot"></div>
+    <script>
+        var graphJSON = {{ graphJSON | tojson | safe }};
+        
+        // Parse the graphJSON string into an array of traces
+        var traces = JSON.parse(graphJSON);
+
+        // Set layout options for the plot
+        var layout = {
+            title: 'Multiple Stock Price Plot',
+            xaxis: {
+                title: 'Date'
+            },
+            yaxis: {
+                title: 'Price'
+            }
+        };
+
+        // Plot all traces on the same graph
+        Plotly.newPlot('plot', traces, layout);
+    </script>
+</body>
+</html>

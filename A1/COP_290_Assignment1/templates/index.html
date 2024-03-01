@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Price Plotter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Stock Price Plotter</h1>
+        <form action="/plot" method="POST" id="plot_form">
+            <label for="plot_option">Select Plot Option:</label>
+            <select id="plot_option" name="plot_option" onchange="toggleForm()" required>
+                <option value="">Select Option</option>
+                <option value="single">Plot a Single Stock</option>
+                <option value="multiple">Plot Multiple Stocks</option>
+            </select><br><br>
+        </form>
+        <div id="single_stock_form" style="display:none;">
+            <form action="/plot_single" method="POST">
+                <label for="stock_symbol">Stock Symbol:</label>
+                <input type="text" id="stock_symbol" name="stock_symbol" required><br><br>
+                <label for="time_scale">Time Scale:</label>
+                <select id="time_scale" name="time_scale" required>
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="yearly">Yearly</option>
+                </select><br><br>
+                <button type="submit">Plot Graph</button>
+            </form>
+        </div>
+        <div id="multiple_stocks_form" style="display:none;">
+            <form action="/plot_multiple" method="POST">
+                <input type="hidden" name="plot_type" value="multiple">
+                <label for="stock_symbol_1">Stock Symbol 1:</label>
+                <input type="text" id="stock_symbol_1" name="stock_symbol_1" required><br><br>
+                <label for="stock_symbol_2">Stock Symbol 2:</label>
+                <input type="text" id="stock_symbol_2" name="stock_symbol_2" required><br><br>
+                <label for="stock_symbol_3">Stock Symbol 3:</label>
+                <input type="text" id="stock_symbol_3" name="stock_symbol_3" required><br><br>
+                <label for="stock_symbol_4">Stock Symbol 4:</label>
+                <input type="text" id="stock_symbol_4" name="stock_symbol_4" required><br><br>
+                <label for="time_scale">Time Scale:</label>
+                <select id="time_scale" name="time_scale" required>
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="yearly">Yearly</option>
+                </select><br><br>
+                <button type="submit">Plot Graph</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function toggleForm() {
+            var plotOption = document.getElementById("plot_option").value;
+            if (plotOption === "single") {
+                document.getElementById("single_stock_form").style.display = "block";
+                document.getElementById("multiple_stocks_form").style.display = "none";
+            } else if (plotOption === "multiple") {
+                document.getElementById("single_stock_form").style.display = "none";
+                document.getElementById("multiple_stocks_form").style.display = "block";
+            } else {
+                document.getElementById("single_stock_form").style.display = "none";
+                document.getElementById("multiple_stocks_form").style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

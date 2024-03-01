@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Price Plot</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h1>Stock Price Plot</h1>
+    <div id="plot"></div>
+    <script>
+        var graphJSON = {{ graphJSON | tojson | safe }};
+        Plotly.plot('plot', JSON.parse(graphJSON));
+    </script>
+</body>
+</html>
+
