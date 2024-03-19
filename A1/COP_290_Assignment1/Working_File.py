@@ -33,7 +33,7 @@ def plot_single_stock():
         y = stock_data['LTP']
 
     elif time_scale == 'weekly':
-        data = main.get_data(stock_symbol, 1)
+        data = main.get_data(stock_symbol, 2)
         main.write_to_csv(data, '${SYMBOL}.csv')
         df = pd.read_csv('${SYMBOL}.csv')
         stock_data = df[df['SYMBOL'] == stock_symbol]
@@ -47,7 +47,7 @@ def plot_single_stock():
         y = weekly_data['LTP']
 
     elif time_scale == 'monthly':
-        data = main.get_data(stock_symbol, 1)
+        data = main.get_data(stock_symbol, 5)
         main.write_to_csv(data, '${SYMBOL}.csv')
         df = pd.read_csv('${SYMBOL}.csv')
         stock_data = df[df['SYMBOL'] == stock_symbol]
@@ -61,7 +61,7 @@ def plot_single_stock():
         y = monthly_data['LTP']
 
     else:
-        data = main.get_data(stock_symbol, 1)
+        data = main.get_data(stock_symbol, 10)
         main.write_to_csv(data, '${SYMBOL}.csv')
         df = pd.read_csv('${SYMBOL}.csv')
         stock_data = df[df['SYMBOL'] == stock_symbol]
@@ -106,7 +106,7 @@ def plot_multiple_stocks():
 
     elif time_scale == 'weekly':
         for i in range(4):
-            data.append(main.get_data(stock_symbols[i], 1))
+            data.append(main.get_data(stock_symbols[i], 2))
             main.write_to_csv(data[i], '${SYMBOL}.csv')
             df = pd.read_csv('${SYMBOL}.csv')
             stock_data = df[df['SYMBOL'] == stock_symbols[i]]
@@ -120,7 +120,7 @@ def plot_multiple_stocks():
 
     elif time_scale == 'monthly':
         for i in range(4):
-            data.append(main.get_data(stock_symbols[i], 1))
+            data.append(main.get_data(stock_symbols[i], 5))
             main.write_to_csv(data[i], '${SYMBOL}.csv')
             df = pd.read_csv('${SYMBOL}.csv')
             stock_data = df[df['SYMBOL'] == stock_symbols[i]]
@@ -134,7 +134,7 @@ def plot_multiple_stocks():
 
     else:
         for i in range(4):
-            data.append(main.get_data(stock_symbols[i], 1))
+            data.append(main.get_data(stock_symbols[i], 10))
             main.write_to_csv(data[i], '${SYMBOL}.csv')
             df = pd.read_csv('${SYMBOL}.csv')
             stock_data = df[df['SYMBOL'] == stock_symbols[i]]
