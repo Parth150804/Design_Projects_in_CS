@@ -36,10 +36,10 @@ def plot_single_stock():
         data = main.get_data(stock_symbol, 1)
         main.write_to_csv(data, '${SYMBOL}.csv')
         df = pd.read_csv('${SYMBOL}.csv')
-        df['DATE'] = pd.to_datetime(df['DATE'])
         stock_data = df[df['SYMBOL'] == stock_symbol]
         if stock_data.empty:
             return 'Invalid stock symbol'
+        df['DATE'] = pd.to_datetime(df['DATE'])
         df.drop(columns=['SERIES', 'SYMBOL'], inplace=True)
         weekly_data = df.resample('W', on='DATE').mean()
 
@@ -112,9 +112,10 @@ def plot_multiple_stocks():
             stock_data = df[df['SYMBOL'] == stock_symbols[i]]
             if stock_data.empty:
                 return 'Invalid stock symbol'
+            df['DATE'] = pd.to_datetime(df['DATE'])
             df.drop(columns=['SERIES', 'SYMBOL'], inplace=True)
             weekly_data = df.resample('W', on='DATE').mean()
-            x.append(weekly_data.index)
+            x.append(weekly_data.index)  
             y.append(weekly_data['LTP'])
 
     elif time_scale == 'monthly':
